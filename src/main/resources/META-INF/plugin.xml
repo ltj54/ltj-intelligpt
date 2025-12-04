@@ -1,0 +1,66 @@
+<idea-plugin>
+    <id>no.ltj.intelligpt</id>
+    <name>LTJ IntelliGPT</name>
+    <version>1.0.0</version>
+
+    <vendor email="ltj@example.com" url="https://github.com/ltj54">
+        LTJ
+    </vendor>
+
+    <!-- Sett inn ikon (CE-kompatibel og Marketplace-kompatibel) -->
+    <icon>icons/ltj_gpt.svg</icon>
+
+    <description><![CDATA[
+        <h2>LTJ IntelliGPT</h2>
+        <p>En AI-assistent inne i IntelliJ Community Edition.<br/>
+        Genererer commit-meldinger, forklarer kode, og tilbyr inline forslag.</p>
+    ]]></description>
+
+    <!-- IntelliJ Community Edition 2025.1 = build 251 -->
+    <idea-version since-build="251"/>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <actions>
+        <action id="LTJ.ExplainCodeAction"
+                class="no.ltj.intelligpt.actions.ExplainCodeAction"
+                text="LTJ IntelliGPT – Forklar kode"
+                description="Forklar valgt kode med LTJ IntelliGPT">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="LTJ.GenerateUnitTestAction"
+                class="no.ltj.intelligpt.actions.GenerateUnitTestAction"
+                text="LTJ IntelliGPT – Generer enhetstest"
+                description="Generer en enhetstest basert på markert kode">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="LTJ.CommitMessageAction"
+                class="no.ltj.intelligpt.actions.CommitMessageAction"
+                text="LTJ IntelliGPT – Commitmelding"
+                description="Generer commitmelding basert på tekst i editor">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <action id="LTJ.InlineSuggestionAction"
+                class="no.ltj.intelligpt.actions.InlineSuggestionAction"
+                text="LTJ IntelliGPT – Inline forslag"
+                description="Vis inline AI-kodeforslag">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="no.ltj.intelligpt.settings.IntelliGPTSettingsState"/>
+
+        <applicationConfigurable id="LTJIntelliGPTSettings">
+            <configurable
+                    displayName="LTJ IntelliGPT"
+                    instance="no.ltj.intelligpt.settings.IntelliGPTSettingsConfigurable"/>
+        </applicationConfigurable>
+    </extensions>
+
+</idea-plugin>
