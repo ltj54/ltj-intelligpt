@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>no.ltj.intelligpt</id>
     <name>LTJ IntelliGPT</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <vendor email="ltj@example.com" url="https://github.com/ltj54">
         LTJ
