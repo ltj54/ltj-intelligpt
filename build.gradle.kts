@@ -5,42 +5,45 @@ plugins {
 }
 
 group = "no.ltj.intelligpt"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
-
     intellijPlatform {
         defaultRepositories()
     }
 }
 
-dependencies {
-    intellijPlatform {
-        // IntelliJ Community Edition – riktig måte
-        create("IC", "2025.1")
-
-        // Kun Java-plugin (bundled)
-        bundledPlugin("com.intellij.java")
-
-        // Test-framework
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
-    }
-}
-
 intellijPlatform {
+
+    // Disse skrur du av for å gjøre pluginet raskere og lettere
+    buildSearchableOptions.set(false)
+    instrumentCode.set(false)
+
     pluginConfiguration {
         ideaVersion {
-            // since-build for 2025.1
-            // 251 = 2025.1 baseline
-            sinceBuild = "251"
+            sinceBuild = "251"   // IntelliJ 2025.1 baseline
         }
 
         version.set("1.0.0")
 
         changeNotes = """
-            Initial LTJ IntelliGPT version.
+            Initial version of LTJ IntelliGPT.
         """.trimIndent()
+    }
+}
+
+dependencies {
+    intellijPlatform {
+
+        // IntelliJ Community Edition 2025.1
+        intellijIdeaCommunity("2025.1")
+
+        // Bundled Java support
+        bundledPlugin("com.intellij.java")
+
+        // Test framework (kan droppes men anbefales)
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
 }
 
