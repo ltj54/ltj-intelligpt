@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build IntelliJ plugin
-        working-directory: ./ltj-intelligpt
+        working-directory: ./
         run: ./gradlew clean buildPlugin
 
       - name: Upload plugin artifact
