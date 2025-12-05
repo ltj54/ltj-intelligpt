@@ -7,6 +7,8 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.progress.*;
+import com.intellij.openapi.application.ApplicationManager;
 import no.ltj.intelligpt.backend.BackendClientAsync;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,15 +37,33 @@ public class ExplainCodeAction extends AnAction {
             return;
         }
 
-        BackendClientAsync.sendAsync(project, "explain_code", text, new BackendClientAsync.Callback() {
+        // Run async task with IntelliJ progress UI
+        ProgressManager.getInstance().run(new Task.Backgroundable(project, "Explaining code with LTJ IntelliGPT...", false) {
             @Override
-            public void onSuccess(String result) {
-                Messages.showInfoMessage(project, result, "Explanation");
-            }
+            public void run(@NotNull ProgressIndicator indicator) {
 
-            @Override
-            public void onError(String message) {
-                Messages.showErrorDialog(project, message, "LTJ IntelliGPT Error");
+                indicator.setIndeterminate(true);
+
+                BackendClientAsync.sendAsync(
+                        project,
+                        "explain_code",
+                        text,
+                        new BackendClientAsync.Callback() {
+                            @Override
+                            public void onSuccess(String result) {
+                                ApplicationManager.getApplication().invokeLater(() ->
+                                        Messages.showInfoMessage(project, result, "Explanation")
+                                );
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                ApplicationManager.getApplication().invokeLater(() ->
+                                        Messages.showErrorDialog(project, message, "LTJ IntelliGPT Error")
+                                );
+                            }
+                        }
+                );
             }
         });
     }

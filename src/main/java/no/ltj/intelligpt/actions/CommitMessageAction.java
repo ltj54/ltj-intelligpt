@@ -19,10 +19,11 @@ public class CommitMessageAction extends AnAction {
         Project project = e.getProject();
         if (project == null) return;
 
-        String input = Messages.showTextAreaDialog(
-                null,
-                "",
-                "Paste diff / description for commit message",
+        // Input dialog (CE-friendly)
+        String input = Messages.showInputDialog(
+                project,
+                "Paste diff or description:",
+                "LTJ IntelliGPT – Commit Message",
                 null
         );
 
@@ -33,11 +34,11 @@ public class CommitMessageAction extends AnAction {
         BackendClientAsync.sendAsync(project, "commit_message", input, new BackendClientAsync.Callback() {
             @Override
             public void onSuccess(String result) {
+
                 Messages.showTextAreaDialog(
                         null,
                         result,
-                        "Generated Commit Message",
-                        null
+                        "Generated Commit Message"
                 );
             }
 

@@ -7,49 +7,70 @@
         LTJ
     </vendor>
 
-    <!-- Sett inn ikon (CE-kompatibel og Marketplace-kompatibel) -->
-    <icon>icons/ltj_gpt.svg</icon>
-
     <description><![CDATA[
         <h2>LTJ IntelliGPT</h2>
-        <p>En AI-assistent inne i IntelliJ Community Edition.<br/>
-        Genererer commit-meldinger, forklarer kode, og tilbyr inline forslag.</p>
+        <p>En AI-assistent for IntelliJ Community Edition.<br/>
+        Genererer commit-meldinger, forklarer kode og tilbyr inline forslag.</p>
     ]]></description>
 
     <!-- IntelliJ Community Edition 2025.1 = build 251 -->
     <idea-version since-build="251"/>
 
+    <!-- Required modules -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
     <actions>
+
+        <!-- 🔍 Explain code -->
         <action id="LTJ.ExplainCodeAction"
                 class="no.ltj.intelligpt.actions.ExplainCodeAction"
                 text="LTJ IntelliGPT – Forklar kode"
-                description="Forklar valgt kode med LTJ IntelliGPT">
+                description="Forklar valgt kode med LTJ IntelliGPT"
+                icon="icons/ltj_gpt.svg">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
 
+        <!-- 🧪 Unit test generation -->
         <action id="LTJ.GenerateUnitTestAction"
                 class="no.ltj.intelligpt.actions.GenerateUnitTestAction"
                 text="LTJ IntelliGPT – Generer enhetstest"
-                description="Generer en enhetstest basert på markert kode">
+                description="Generer en enhetstest basert på markert kode"
+                icon="icons/ltj_gpt.svg">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
 
+        <!-- 📝 Commit message -->
         <action id="LTJ.CommitMessageAction"
                 class="no.ltj.intelligpt.actions.CommitMessageAction"
                 text="LTJ IntelliGPT – Commitmelding"
-                description="Generer commitmelding basert på tekst i editor">
+                description="Generer commitmelding basert på tekst i editor"
+                icon="icons/ltj_gpt.svg">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
 
+        <!-- ✨ Inline suggestion -->
         <action id="LTJ.InlineSuggestionAction"
                 class="no.ltj.intelligpt.actions.InlineSuggestionAction"
                 text="LTJ IntelliGPT – Inline forslag"
-                description="Vis inline AI-kodeforslag">
+                description="Vis inline AI-kodeforslag"
+                icon="icons/ltj_gpt.svg">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
+
+        <!-- 🧰 Toolbar menu (dropdown) -->
+        <group id="LTJ.Toolbar"
+               text="LTJ IntelliGPT"
+               popup="true"
+               icon="icons/ltj_gpt.svg">
+            <add-to-group group-id="MainToolbarRight" anchor="last"/>
+
+            <reference ref="LTJ.ExplainCodeAction"/>
+            <reference ref="LTJ.GenerateUnitTestAction"/>
+            <reference ref="LTJ.CommitMessageAction"/>
+            <reference ref="LTJ.InlineSuggestionAction"/>
+        </group>
+
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
