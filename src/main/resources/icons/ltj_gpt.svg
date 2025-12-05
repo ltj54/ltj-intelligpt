@@ -1,18 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-    <!-- JetBrains-style angled background -->
-    <rect width="16" height="16" rx="2" fill="#5A00A8"/>
-    <path d="M0 12 L16 4 V0 L0 8 Z" fill="#8237FF" opacity="0.35"/>
-    <path d="M0 14 L16 6 V4 L0 12 Z" fill="#B679FF" opacity="0.25"/>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16" height="16"
+     viewBox="0 0 16 16">
 
-    <!-- JetBrains-style compact block letters -->
+    <!-- Background -->
+    <rect width="16" height="16" rx="3" fill="#5A00A8"/>
 
-    <!-- l -->
-    <path d="M4.2 5.4v5.2h1.4v-0.6H4.9V5.4h-0.7z" fill="white"/>
+    <!-- JetBrains-style diagonal highlight -->
+    <path d="M0 12 L16 4 V0 L0 8 Z"
+          fill="#FFFFFF"
+          opacity="0.10"/>
 
-    <!-- t -->
-    <path d="M6.8 5.4v0.6h1.3v4.6h0.6V6h1.4v-0.6H6.8z" fill="white"/>
+    <!-- Centered thick L -->
+    <!-- Vertical stroke -->
+    <rect x="5.2" y="4" width="2.0" height="8" fill="white"/>
+    <!-- Horizontal stroke -->
+    <rect x="5.2" y="10" width="6.0" height="2.0" fill="white"/>
 
-    <!-- j -->
-    <path d="M12 5.4v3.5c0 0.7-0.4 1.1-1 1.1H10.4v-0.6h0.6c0.3 0 0.4-0.2 0.4-0.5V5.4h0.6z"
-          fill="white"/>
 </svg>
